@@ -1,9 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# frontend
-
 ## IDE
-frontend/.idea
+*/.idea
+
+# frontend
 
 ## dependencies
 frontend/node_modules
@@ -28,9 +28,6 @@ frontend/yarn-debug.log*
 frontend/yarn-error.log*
 
 # backend
-
-## IDE
-backend/.idea
 
 ## dependencies
 backend/node_modules
