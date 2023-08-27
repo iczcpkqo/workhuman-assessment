@@ -11,6 +11,9 @@ class DB {
      *
      * @param {string} tableName The name of table
      * @param {Array} fields A Array of the fields String
+     *
+     * @author Sean
+     * @date 24-08-2023
      */
     static createTable(tableName, fields) {
         db.serialize(() => {
@@ -34,6 +37,9 @@ class DB {
      * @param {Array} fields A Array of the fields String
      * @param {Array} values Array of the values of fields, it should match the fields Array param
      * @param {Object} resolve A Function about how to process the data
+     *
+     * @author Sean
+     * @date 24-08-2023
      */
     static insert(tableName, fields, values, resolve){
         const sql = `
@@ -45,7 +51,15 @@ class DB {
         db.run(sql, resolve);
     }
 
-
+    /**
+     * Select All data from a table
+     *
+     * @param {string} tableName The name of table
+     * @param {Object} resolve A Function about how to process the data
+     *
+     * @author Sean
+     * @date 24-08-2023
+     */
     static selectAllCountries(resolve) {
         DB.select('Countries', resolve);
     }

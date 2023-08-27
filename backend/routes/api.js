@@ -2,11 +2,19 @@ var express = require('express');
 var router = express.Router();
 const DB = require('./db').DB;
 
+/**
+ * A test API that responds with a resource.
+ */
 router.get('/test', function (req, res, next) {
     res.send('respond with a resource');
 });
 
-/* POST: INSERT, API Countries*/
+/**
+ * An API to insert a country into the database.
+ *
+ * @author Sean
+ * @date 24-08-2023
+ */
 router.post('/countries', function (req, res, next) {
     // res.send('datdddd');
     DB.insertCountry(req.body.name, () => {
@@ -16,7 +24,12 @@ router.post('/countries', function (req, res, next) {
     console.log(req.body.name);
 });
 
-/* GET Country listing. */
+/**
+ * An API to get a list of all countries from the database.
+ *
+ * @author Sean
+ * @date 24-08-2023
+ */
 router.get('/countries', function (req, res, next) {
 
     DB.select('Countries', (err, data) => {
@@ -26,6 +39,12 @@ router.get('/countries', function (req, res, next) {
     })
 });
 
+/**
+ * An API to delete all countries from the database.
+ *
+ * @author Sean
+ * @date 24-08-2023
+ */
 router.delete('/countries', function(req, res, next) {
     DB.deleteAllCountries((data)=>{
         console.log('Deleted');
