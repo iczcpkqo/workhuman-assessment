@@ -29,18 +29,23 @@ function CountryBox({selected}) {
             setDataWholeCountries(countries);
             setDataCountries(countries.filter(country => country.name.toLowerCase().includes(searching.toLowerCase())));
         }).then((response) => {
-            console.log('Deleted Countries:' + response);
+            console.log('InitLoad Countries: ' + response);
         }).catch((error) => {
             console.log(error);
-            setTimeout(()=>{
+            setTimeout(() => {
                 setIsLoaded(false);
-            },3000);
+            }, 3000);
         });
     }
 
     function onSearchChange(text) {
-        setSearching(text);
-        setDataCountries(dataWholeCountries.filter(country => country.name.toLowerCase().includes(text.toLowerCase())));
+
+        if (text === '') {
+            initLoad()
+        } else {
+            setSearching(text);
+            setDataCountries(dataWholeCountries.filter(country => country.name.toLowerCase().includes(text.toLowerCase())));
+        }
     }
 
     return (
@@ -65,11 +70,13 @@ function CountryBox({selected}) {
 
 
 async function loadCountries(iniData) {
-    console.log("ini Data ====== ");
     await ajax("api/countries", {}).then(e => {
-        console.log("-- node list ajax body --");
+        console.log("Got ALL Countries: ");
         console.log(e.data);
         iniData(e.data);
+    }).catch((error) => {
+        console.log("= ERROR = Can NOT get ALL countries");
+        console.log(error);
     });
 }
 
