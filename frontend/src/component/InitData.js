@@ -6,7 +6,7 @@ import Alert from 'react-bootstrap/Alert';
 
 function CountryBox() {
 
-    const [dataWholeCountries, setDataWholeCountries] = useState(T_dataCountries);
+    const [dataWholeCountries, setDataWholeCountries] = useState(getSessionCountries());
     const [isShowApply, setIsShowApply] = useState(false);
     const [isShowDelete, setIsShowDelete] = useState(false);
     const [isShowReload, setIsShowReload] = useState(false);
@@ -29,7 +29,7 @@ function CountryBox() {
     }
 
     function onLoadData() {
-        setDataWholeCountries(T_dataCountries);
+        setDataWholeCountries(getSessionCountries());
     }
 
     async function insertCountry(countryName) {
@@ -60,7 +60,7 @@ function CountryBox() {
     }
 
     function onReload(){
-        setDataWholeCountries([...T_dataCountries]);
+        setDataWholeCountries([...getSessionCountries()]);
         setIsShowReload(true);
         setIsHiddenReload(false);
         setTimeout(()=>{
@@ -160,34 +160,38 @@ async function loadCountries(iniData) {
 
 export default CountryBox;
 
-const T_dataCountries = [{id: 1, name: 'Albania'},
-    {id: 2, name: 'Andorra'},
-    {id: 3, name: 'Australia'},
-    {id: 4, name: 'Brazil'},
-    {id: 5, name: 'Belgium'},
-    {id: 6, name: 'Canada'},
-    {id: 7, name: 'China'},
-    {id: 8, name: 'France'},
-    {id: 9, name: 'Germany'},
-    {id: 10, name: 'India'},
-    {id: 11, name: 'Indonesia'},
-    {id: 12, name: 'Ireland'},
-    {id: 13, name: 'Italy'},
-    {id: 14, name: 'Japan'},
-    {id: 15, name: 'Kenya'},
-    {id: 16, name: 'Luxembourg'},
-    {id: 17, name: 'Mexico'},
-    {id: 18, name: 'New Zealand'},
-    {id: 19, name: 'Nigeria'},
-    {id: 20, name: 'Portugal'},
-    {id: 21, name: 'Russia'},
-    {id: 22, name: 'South Africa'},
-    {id: 23, name: 'South Korea'},
-    {id: 24, name: 'Spain'},
-    {id: 25, name: 'Sweden'},
-    {id: 26, name: 'Thailand'},
-    {id: 27, name: 'Ukraine'},
-    {id: 28, name: 'United Kingdom'},
-    {id: 29, name: 'United States of America'},
-    {id: 30, name: 'Vietnam'},
-    {id: 31, name: 'Zambia'}];
+window.sessionStorage.setItem("sessionCountries", JSON.stringify( [{id: 1, name: 'Albania'},
+        {id: 2, name: 'Andorra'},
+        {id: 3, name: 'Australia'},
+        {id: 4, name: 'Brazil'},
+        {id: 5, name: 'Belgium'},
+        {id: 6, name: 'Canada'},
+        {id: 7, name: 'China'},
+        {id: 8, name: 'France'},
+        {id: 9, name: 'Germany'},
+        {id: 10, name: 'India'},
+        {id: 11, name: 'Indonesia'},
+        {id: 12, name: 'Ireland'},
+        {id: 13, name: 'Italy'},
+        {id: 14, name: 'Japan'},
+        {id: 15, name: 'Kenya'},
+        {id: 16, name: 'Luxembourg'},
+        {id: 17, name: 'Mexico'},
+        {id: 18, name: 'New Zealand'},
+        {id: 19, name: 'Nigeria'},
+        {id: 20, name: 'Portugal'},
+        {id: 21, name: 'Russia'},
+        {id: 22, name: 'South Africa'},
+        {id: 23, name: 'South Korea'},
+        {id: 24, name: 'Spain'},
+        {id: 25, name: 'Sweden'},
+        {id: 26, name: 'Thailand'},
+        {id: 27, name: 'Ukraine'},
+        {id: 28, name: 'United Kingdom'},
+        {id: 29, name: 'United States of America'},
+        {id: 30, name: 'Vietnam'},
+        {id: 31, name: 'Zambia'}]));
+
+function getSessionCountries(){
+    return JSON.parse(window.sessionStorage.getItem("sessionCountries"));
+}

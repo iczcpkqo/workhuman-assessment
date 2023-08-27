@@ -3,8 +3,6 @@ const dbname = 'countries.sqlite3';
 // 创建并连接一个数据库
 const db = new sqlite3.Database(dbname)
 
-
-// Articles API
 class DB {
     //
 
@@ -15,13 +13,11 @@ class DB {
      * @param {Array} fields A Array of the fields String
      */
     static createTable(tableName, fields) {
-        // 创建一个articles表
         db.serialize(() => {
             const sql = `
                                 CREATE TABLE IF NOT EXISTS ${tableName} 
                                 (id integer primary key, ${fields.join(',')})
                                `;
-            // 如果没有articles表,创建一个
             db.run(sql);
         });
 
@@ -65,7 +61,6 @@ class DB {
      * @param {Object} resolve A Function about how to process the data
      */
     static select(tableName, resolve) {
-        // 使用sqlite3的all
         db.all(`SELECT * FROM ${tableName}`, resolve);
     }
 
@@ -77,58 +72,7 @@ class DB {
         db.run(`DELETE FROM ${tableName}`,resolve);
     }
 
-    // // 根据id 获取文章
-    // static find(id, cb) {
-    //     // 使用sqlite3的get
-    //     db.get('SELECT * FROM articles WHERE id = ?', id, cb);
-    // }
-    //
-    // // 添加一个条文章记录
-    // static create(data, cb) {
-    //     const sql = `
-    //             INSERT INTO
-    //             articles(title,content)
-    //             VALUES(?,?)
-    //             ;select last_insert_rowid();`;
-    //     db.run(sql, data.title, data.content, cb);
-    // }
-    //
-    // // 删除一篇文章
-    // static delete(id, cb) {
-    //     if (!id) return cb(new Error(`缺少参数id`));
-    //     db.run('DELETE FROM articles WHERE id=?', id, cb)
-    // }
-    //
-    // // 更新一篇文章数据
-    // static update(data, cb) {
-    //     const sql = `
-    //         UPDATE articles
-    //         SET title=?,content=?
-    //         WHERE id=?
-    //     `
-    //     db.run(sql, data.title, data.content, data.id, cb)
-    // }
 }
 
-
-/**
- * Select All Document of Co
- */
-// function selectAll(co, where={}) {
-//     return new Promise(resolve => {
-//
-//         MongoClient.connect(url, { useUnifiedTopology: true },(err, con)=>{
-//             let db = con.db(dbName);
-//             db.collection(co).find(where).toArray((err, data)=>{
-//                 con.close();
-//                 resolve(data);
-//             });
-//         });
-//
-//
-//
-//
-//     });
-// }
-
+DB.createTable('Countries', ['name']);
 module.exports.DB = DB;

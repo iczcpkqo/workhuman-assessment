@@ -11,9 +11,19 @@ import React from "react";
 function App() {
 
     let tabSearch;
-
-    function selected(ex) {
-        tabSearch = ex;
+    function selected(func) {
+        tabSearch = func;
+    }
+    function debounce(delay) {
+        let timer;
+        return function(...args) {
+            if (args[0] !== 'countries') return;
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                tabSearch(...args);
+                timer = null;
+            }, delay);
+        };
     }
 
     return (
@@ -22,10 +32,12 @@ function App() {
             id="fill-tab-example"
             className="mb-0 border-primary"
             fill
-            onSelect={(k) => {
-                if (k === 'countries')
-                    tabSearch();
-            }}
+            // onSelect={(k) => {
+            //     if (k === 'countries')
+            //         debounce()
+            //         tabSearch();
+            // }}
+            onSelect={debounce(300)}
         >
             <Tab eventKey="countries" title="Countries"
             >
