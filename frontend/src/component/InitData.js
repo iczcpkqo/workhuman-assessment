@@ -3,7 +3,14 @@ import {useState} from "react";
 import ajax from "../api/ajax";
 import Alert from 'react-bootstrap/Alert';
 
-
+/**
+ * A component that renders a form for managing countries.
+ *
+ * @returns {Element} A component used to process data in a database component.
+ *
+ * @author Sean
+ * @date 24-08-2023
+ */
 function CountryBox() {
 
     const [dataWholeCountries, setDataWholeCountries] = useState(getSessionCountries());
@@ -12,6 +19,9 @@ function CountryBox() {
     const [isShowReload, setIsShowReload] = useState(false);
     const [isHiddenReload, setIsHiddenReload] = useState(true);
 
+    /**
+     * A function that is called when the Apply button is clicked.
+     */
     function onApply() {
         deleteCountries().then((response)=>{
             console.log('Deleted Countries:' + response);
@@ -26,6 +36,9 @@ function CountryBox() {
         },3000)
     }
 
+    /**
+     * A function that is called to insert the countries.
+     */
     function onInsert() {
         // console.log(dataWholeCountries);
         dataWholeCountries.forEach((country) => {
@@ -33,13 +46,14 @@ function CountryBox() {
         });
     }
 
-    function onLoadData() {
-        setDataWholeCountries(getSessionCountries());
-    }
-
+    /**
+     * A function that is called to insert a country.
+     *
+     * @param {string} countryName - The name of the country to insert.
+     */
     async function insertCountry(countryName) {
         console.log("Insert New Whole Countries");
-        await ajax("api/insert/countries", {name: countryName}, 'POST').then(e => {
+        await ajax("api/countries", {name: countryName}, 'POST').then(e => {
             console.log("Inserted : ");
             console.log(e.data);
         }).catch((error)=>{
@@ -47,6 +61,9 @@ function CountryBox() {
         });
     }
 
+    /**
+     * A function that is called when the Clear button is clicked.
+     */
     function onClear() {
         deleteCountries();
         setDataWholeCountries([]);
@@ -57,8 +74,13 @@ function CountryBox() {
         },3000)
     }
 
+    /**
+     * A function that is called to delete the countries.
+     *
+     * @returns {Promise} A promise that resolves when the countries are deleted.
+     */
     async function deleteCountries() {
-        await ajax("api/delete", {}, 'DELETE').then(e => {
+        await ajax("api/countries", {}, 'DELETE').then(e => {
             console.log("Deleted: Countries: ");
             console.log(e.data);
         }).catch((error)=>{
@@ -67,6 +89,9 @@ function CountryBox() {
         });
     }
 
+    /**
+     * A function that is called to load the countries from the session storage.
+     */
     function onReload(){
         setDataWholeCountries([...getSessionCountries()]);
         setIsShowReload(true);
@@ -153,17 +178,6 @@ function CountryBox() {
         </div>
     )
         ;
-}
-
-
-async function loadCountries(iniData) {
-    console.log("ini Data ====== ");
-    await ajax("api/testing/select", {}).then(e => {
-        console.log("-- node list ajax body --");
-        console.log(e.data);
-        iniData(e.data);
-    });
-    // return T_dataCountries;
 }
 
 export default CountryBox;

@@ -4,6 +4,14 @@ import CountryInput from "./CountryInput";
 import CountryList from "./CountryList";
 import ajax from "../api/ajax";
 
+/**
+ * A component that renders a search box and a list of countries.
+ *
+ * @param {Function} selected - A function that is called when the component is selected.
+ *
+ * @author Sean
+ * @date 24-08-2023
+ */
 function CountryBox({selected}) {
 
     const [dataWholeCountries, setDataWholeCountries] = useState([]);
@@ -14,6 +22,9 @@ function CountryBox({selected}) {
         setIsLoaded(false);
     });
 
+    /**
+     * A useEffect hook that initializes the component.
+     */
     useEffect(() => {
         if (!isLoaded) {
             initLoad();
@@ -23,7 +34,9 @@ function CountryBox({selected}) {
         };
     }, [isLoaded]);
 
-
+    /**
+     * A function that initializes the component by loading the countries.
+     */
     function initLoad() {
         loadCountries((countries) => {
             setDataWholeCountries(countries);
@@ -38,6 +51,11 @@ function CountryBox({selected}) {
         });
     }
 
+    /**
+     * A function that is called when the search text changes.
+     *
+     * @param {string} text - The new search text.
+     */
     function onSearchChange(text) {
 
         if (text === '') {

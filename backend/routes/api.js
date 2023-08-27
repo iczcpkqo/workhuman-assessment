@@ -6,14 +6,8 @@ router.get('/test', function (req, res, next) {
     res.send('respond with a resource');
 });
 
-/* PUT: CREATE Table, Countries */
-router.put('/create/countries', function (req, res, next) {
-    DB.createTable('Countries', ['name']);
-    res.send('Executed Create Table Countries');
-});
-
 /* POST: INSERT, API Countries*/
-router.post('/insert/countries', function (req, res, next) {
+router.post('/countries', function (req, res, next) {
     // res.send('datdddd');
     DB.insertCountry(req.body.name, () => {
         res.send('INSERTED');
@@ -32,10 +26,7 @@ router.get('/countries', function (req, res, next) {
     })
 });
 
-/**
- * Delete Countries
- */
-router.delete('/delete', function(req, res, next) {
+router.delete('/countries', function(req, res, next) {
     DB.deleteAllCountries((data)=>{
         console.log('Deleted');
         res.send('Deleted');

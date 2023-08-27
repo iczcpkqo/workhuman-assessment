@@ -3,6 +3,19 @@ const HOSTER = {
     TEST:  "http://localhost:9000/"
 }
 
+/**
+ * A function that sends an AJAX request.
+ *
+ * @param {string} url - The URL to send the request to. Default is 'executeQuery'.
+ * @param {Object} data - The data to send with the request. Default is {}.
+ * @param {string} type - The type of the request. Default is 'GET'.
+ * @param {string} hoster - The hoster to use. Default is 'TEST'.
+ *
+ * @returns {Promise} A promise that resolves with the response of the request.
+ *
+ * @author Sean
+ * @date 24-08-2023
+ */
 export default function ajax(url='executeQuery',data={},type='GET', hoster='TEST'){
 
     // https://robin-server-api.herokuapp.com/event/read_all
