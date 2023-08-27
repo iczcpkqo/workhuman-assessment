@@ -13,7 +13,12 @@ function CountryBox() {
     const [isHiddenReload, setIsHiddenReload] = useState(true);
 
     function onApply() {
-        deleteCountries();
+        deleteCountries().then((response)=>{
+            console.log('Deleted Countries:' + response);
+        }).catch((error)=>{
+            console.log('== Error == : Delete Failed | error-initdata-onapply-deletecountries');
+            console.log(error);
+        });
         onInsert();
         setIsShowApply(true);
         setTimeout(()=>{
@@ -35,10 +40,11 @@ function CountryBox() {
     async function insertCountry(countryName) {
         console.log("Insert New Whole Countries");
         await ajax("api/insert/countries", {name: countryName}, 'POST').then(e => {
-            console.log("-- node list ajax body --");
+            console.log("Inserted : ");
             console.log(e.data);
+        }).catch((error)=>{
+            console.log("= Error = Insert Country : " + error);
         });
-        // return T_dataCountries;
     }
 
     function onClear() {
@@ -52,10 +58,12 @@ function CountryBox() {
     }
 
     async function deleteCountries() {
-        console.log("in DEL Countries");
         await ajax("api/delete", {}, 'DELETE').then(e => {
-            console.log("DEL Countries");
+            console.log("Deleted: Countries: ");
             console.log(e.data);
+        }).catch((error)=>{
+            console.log("= Error = Delete Countries : " + error);
+            console.log(error);
         });
     }
 

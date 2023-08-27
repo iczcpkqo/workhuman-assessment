@@ -31,12 +31,7 @@ function App() {
             defaultActiveKey="countries"
             id="fill-tab-example"
             className="mb-0 border-primary"
-            fill
-            // onSelect={(k) => {
-            //     if (k === 'countries')
-            //         debounce()
-            //         tabSearch();
-            // }}
+            // fill
             onSelect={debounce(300)}
         >
             <Tab eventKey="countries" title="Countries"

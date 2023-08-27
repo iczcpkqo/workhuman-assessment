@@ -17,32 +17,27 @@ export default function ajax(url='executeQuery',data={},type='GET', hoster='TEST
             "Access-Control-Allow-Origin": "x-requested-with"
         }
     });
+
     return new Promise(function (resolve,reject){
         let promise
         if(type === 'GET'){
             promise = axiosInstance.get(url, {params:data})//query parameter
-            console.log(promise);
-
-            console.log("GET:" + promise);
         }
-        else if(type === 'POST')
-        {
-            console.log("POST back-end : "+ url);
+        else if(type === 'POST') {
             promise = axiosInstance.post(url,data)
         }
-        else if(type === 'DELETE')
-        {
-            console.log("DELETE back-end : "+ url);
+        else if(type === 'DELETE') {
             promise = axiosInstance.delete(url,data)
+
         }else if(type === 'PATCH'){
-            console.log("PATCH : "+ url);
             promise = axiosInstance.patch(url,data)
         }
-        else
-        {
-            console.log("PUT back-end : "+ url);
+        else {
             promise = axiosInstance.put(url,data)
         }
+
+        console.log(type + ' : ' + url + ' : ' + promise);
+
         promise.then(response =>{
             // if success
             resolve(response)

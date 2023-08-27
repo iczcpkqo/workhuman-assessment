@@ -6,8 +6,6 @@ import ajax from "../api/ajax";
 
 function CountryBox({selected}) {
 
-    // const dataWholeCountries = loadCountries();
-    // const [dataCountries, setDataCountries] = useState(dataWholeCountries);
     const [dataWholeCountries, setDataWholeCountries] = useState([]);
     const [dataCountries, setDataCountries] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -17,9 +15,7 @@ function CountryBox({selected}) {
     });
 
     useEffect(() => {
-        console.log('ususususususus');
         if (!isLoaded) {
-            console.log('ifififififif');
             initLoad();
         }
         return () => {
@@ -30,10 +26,15 @@ function CountryBox({selected}) {
 
     function initLoad() {
         loadCountries((countries) => {
-            console.log('get into iniLoad');
-            console.log(countries);
             setDataWholeCountries(countries);
             setDataCountries(countries.filter(country => country.name.toLowerCase().includes(searching.toLowerCase())));
+        }).then((response) => {
+            console.log('Deleted Countries:' + response);
+        }).catch((error) => {
+            console.log(error);
+            setTimeout(()=>{
+                setIsLoaded(false);
+            },3000);
         });
     }
 
@@ -41,11 +42,6 @@ function CountryBox({selected}) {
         setSearching(text);
         setDataCountries(dataWholeCountries.filter(country => country.name.toLowerCase().includes(text.toLowerCase())));
     }
-
-    function fallback(name) {
-        return (<p className="p-4 pt-5"><strong>Sorry, Error in the {name} component.</strong></p>);
-    }
-
 
     return (
         <Row className="justify-content-center">
@@ -75,8 +71,6 @@ async function loadCountries(iniData) {
         console.log(e.data);
         iniData(e.data);
     });
-    // return T_dataCountries;
 }
-
 
 export default CountryBox;
