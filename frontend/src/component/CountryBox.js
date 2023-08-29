@@ -40,7 +40,7 @@ function CountryBox({selected}) {
     function initLoad() {
         loadCountries((countries) => {
             setDataWholeCountries(countries);
-            setDataCountries(countries.filter(country => country.name.toLowerCase().includes(searching.toLowerCase())));
+            setDataCountries(countries);
         }).then((response) => {
             console.log('InitLoad Countries: ' + response);
         }).catch((error) => {
