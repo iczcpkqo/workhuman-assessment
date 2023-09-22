@@ -4,7 +4,7 @@
 
 * A Input box
   > - Input what you want.
-  > - Filter the infomation in the list box by every single time you press the keyboard.
+  > - Filter the information in the list box by every single time you press the keyboard.
   > - Filter content ignoring case
 
 * A List box
@@ -15,7 +15,7 @@
   > - Delete all the data in database.
   > - Update the data.
 
-##Technology stack
+## Technology stack
 
 * Front-End
   - React
@@ -24,7 +24,7 @@
   - CSS
   - Bootstrap
 
-* BackEnd
+* Back-end
   - Node.js
   - Express.js
   - SQLite
